@@ -1,0 +1,344 @@
+create schema atm_db;
+
+create table atm_db.um_user_pwdrecques(
+quesid integer,
+quesname text,
+status text);
+
+
+INSERT INTO atm_db.um_user_pwdrecques(quesid,quesname,status)
+ VALUES	(1,'What is your school name?','A'),
+	(2,'In which city or town was your first job?','A'),
+	(3,'What was your childhood nickname?','A'),
+	(4,'What is the name of your favourite childhood friend?','A'),
+	(5,'What is your grandmothers first name?','A'),
+	(6,'What is your favorite place of vacation?','A'),
+	(7,'what is your favorite food?','A'),
+	(8,'Where did you meet your spouse?','A');
+
+
+
+CREATE SEQUENCE IF NOT EXISTS atm_db.userseq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+create table atm_db.UM_USER_MASTER(
+userid integer,
+loginid text,
+firstname text,
+lastname text,
+displayname text,
+streetaddress text,
+country text,
+state text,
+city text,
+dob date,
+pincode text,
+emailid text,
+mobileno text,
+designation text,
+password text,
+status char,
+lockstatus text,
+roletype text,
+assrolelist text, 
+pwdrecques text,
+pwdrecans text,
+isPwdReq text,
+ispwdchangereq text,
+LASTLOGOUTDATE date
+);
+
+	
+INSERT INTO atm_db.um_user_master(
+	userid, loginid, firstname, lastname, country, state, city, password,roletype,assrolelist,status,ispwdreq)
+	VALUES (nextval('atm_db.userseq'), 'pritish1234', 'Pritish', 'R', '1', '24', '85', 'pritish','M','1','A','Y');
+
+
+reate table atm_db.UM_USER_COUNTRY(
+countryid integer,
+countrycode character varying(3),
+countryname character varying(100),
+status character(1)
+);
+
+create table atm_db.UM_USER_STATE(
+stateid integer,
+countryid integer,
+statecode character varying(5),
+statename character varying(100),
+status character(1)
+);
+
+create table atm_db.UM_USER_CITY(
+cityid integer,
+countryid integer,
+stateid integer,
+cityname character varying(50),
+status character(1)
+);
+
+
+
+INSERT INTO atm_db.UM_USER_COUNTRY(countryid,countrycode,countryname,status)
+ VALUES	(1,'IN','India','A');
+
+INSERT INTO  atm_db.UM_USER_STATE(stateid,countryid,statecode,statename,status)
+ VALUES	(1,1,'AP','AndhraPradesh','A'),
+	(2,1,'AR','ArunachalPradesh','A'),
+	(3,1,'AS','Assam','A'),
+	(4,1,'BR','Bihar','A'),
+	(5,1,'CG','Chhattisgarh','A'),
+	(6,1,'DL','Delhi','A'),
+	(7,1,'GA','Goa','A'),
+	(8,1,'GJ','Gujarat','A'),
+	(9,1,'HR','Haryana','A'),
+	(10,1,'HP','HimachalPradesh','A'),
+	(11,1,'JH','Jharkhand','A'),
+	(12,1,'KA','Karnataka','A'),
+	(13,1,'KL','Kerala','A'),
+	(14,1,'MP','MadhyaPradesh','A'),
+	(15,1,'MH','Maharashtra','A'),
+	(16,1,'MN','Manipur','A'),
+	(17,1,'ML','Meghalaya','A'),
+	(18,1,'MZ','Mizoram','A'),
+	(19,1,'NL','Nagaland','A'),
+	(20,1,'OR','Odisha','A'),
+	(21,1,'PB','Punjab','A'),
+	(22,1,'RJ','Rajastan','A'),
+	(23,1,'SK','Sikkim','A'),
+	(24,1,'TN','TamilNadu','A'),
+	(25,1,'TG','Telangana','A'),
+	(26,1,'TR','Tripura','A'),
+	(27,1,'UT','Uttarakhand','A'),
+	(28,1,'UP','UttarPradesh','A'),
+	(29,1,'WB','WestBengal','A'),
+	(1,2,'DH','Doha','A'),
+	(2,2,'AZ','Abu az zuluf','A'),
+	(3,2,'AT','Abu Thaylah','A'),
+	(4,2,'AS','As Sabatah','A'),
+	(5,2,'BL','Blare','A'),
+	(7,2,'DK','Dukhan','A');
+
+INSERT INTO atm_db.UM_USER_CITY(cityid,countryid,stateid,cityname,status)
+ VALUES	(1,1,1,'Vishkhapatnam','A'),
+	(2,1,1,'Vijayawada','A'),
+	(3,1,1,'Gundur','A'),
+	(4,1,1,'Nelloore','A'),
+	(5,1,1,'Kurnool','A'),
+	(6,1,1,'Kakinada','A'),
+	(7,1,1,'Kadapa','A'),
+	(8,1,1,'Tirupati','A'),
+	(9,1,1,'Chittoor','A'),
+	(10,1,2,'Itanagar','A'),
+	(11,1,2,'Tawang','A'),
+	(12,1,3,'Guwahati','A'),
+	(13,1,3,'Sivasagar','A'),
+	(14,1,4,'Patna','A'),
+	(15,1,4,'Gaya','A'),
+	(16,1,4,'Sirwan','A'),
+	(17,1,4,'Danapur','A'),
+	(18,1,5,'Raipur','A'),
+	(19,1,5,'Karba','A'),
+	(20,1,5,'Durg','A'),
+	(21,1,5,'Bitaspur','A'),
+	(22,1,6,'Gurugram','A'),
+	(23,1,6,'Ghazlabad','A'),
+	(24,1,6,'Faridabad','A'),
+	(25,1,6,'Agra','A'),
+	(26,1,6,'Sonipat','A'),
+	(27,1,6,'Bawana','A'),
+	(28,1,6,'Kondloi','A'),
+	(29,1,7,'Panaji','A'),
+	(30,1,7,'Mapusa','A'),
+	(31,1,7,'Ponda','A'),
+	(32,1,7,'Sanguem','A'),
+	(33,1,7,'Mormugao','A'),
+	(34,1,8,'Ahmedabad','A'),
+	(35,1,8,'Surat','A'),
+	(36,1,8,'Rajkot','A'),
+	(37,1,8,'Gandhinagar','A'),
+	(38,1,8,'Porbandar','A'),
+	(39,1,8,'Bhavnagar','A'),
+	(40,1,8,'Vadadora','A'),
+	(41,1,9,'Gurugram','A'),
+	(42,1,9,'Faridabad','A'),
+	(43,1,9,'Karnal','A'),
+	(44,1,9,'Sonipat','A'),
+	(45,1,9,'Panipat','A'),
+	(46,1,10,'Shimla','A'),
+	(47,1,10,'Mandi','A'),
+	(48,1,10,'Chamba','A'),
+	(49,1,10,'Palampur','A'),
+	(50,1,10,'Nahan','A'),
+	(51,1,11,'Ranchi','A'),
+	(52,1,11,'Jamshedpur','A'),
+	(53,1,12,'Bengaluru','A'),
+	(54,1,12,'Mangalore','A'),
+	(55,1,12,'Bellari','A'),
+	(56,1,13,'Thiruvanandapuram','A'),
+	(57,1,13,'Kozhikode','A'),
+	(58,1,13,'Kochi','A'),
+	(59,1,13,'Thrissur','A'),
+	(60,1,13,'Kollam','A'),
+	(61,1,13,'Kannur','A'),
+	(62,1,13,'Alappuza','A'),
+	(63,1,13,'Kottayam','A'),
+	(64,1,13,'Palakkad','A'),
+	(65,1,13,'Munnar','A'),
+	(66,1,14,'Bhopal','A'),
+	(67,1,14,'Indore','A'),
+	(68,1,14,'Ujjain','A'),
+	(69,1,15,'Mumbai','A'),
+	(70,1,15,'Pune','A'),
+	(71,1,15,'Nagpur','A'),
+	(72,1,15,'Nashik','A'),
+	(73,1,15,'Amravati','A'),
+	(74,1,15,'Solapur','A'),
+	(75,1,15,'Aurangabad','A'),
+	(76,1,16,'Imphal','A'),
+	(77,1,17,'Shillong','A'),
+	(78,1,18,'Aizawl','A'),
+	(79,1,19,'Kohima','A'),
+	(80,1,20,'Bhubaneswar','A'),
+	(81,1,21,'Amritsar','A'),
+	(82,1,22,'Jaipur','A'),
+	(83,1,22,'Jodhpur','A'),
+	(84,1,23,'Gangtok','A'),
+	(85,1,24,'Chennai','A'),
+	(86,1,24,'Coimbatore','A'),
+	(87,1,24,'Madurai','A'),
+	(88,1,24,'Thiruchirrapalli','A'),
+	(89,1,24,'Tiruppur','A'),
+	(90,1,24,'Salem','A'),
+	(91,1,24,'Erode','A'),
+	(92,1,24,'Tirunelveli','A'),
+	(93,1,24,'Vellore','A'),
+	(94,1,24,'Thoothukudi','A'),
+	(95,1,24,'Dindigul','A'),
+	(96,1,24,'Thanjavur','A'),
+	(97,1,24,'Ranipet','A'),
+	(98,1,24,'Sivagasi','A'),
+	(99,1,24,'Karur','A'),
+	(100,1,24,'Udhagamandalam','A'),
+	(101,1,24,'Hosur','A'),
+	(102,1,24,'Nagercoil','A'),
+	(103,1,24,'Kanchipuram','A'),
+	(104,1,24,'Kumarapalayam','A'),
+	(105,1,24,'Karaikkudi','A'),
+	(106,1,24,'Neyveli','A'),
+	(107,1,24,'Cuddalore','A'),
+	(108,1,24,'Kumbakonam','A'),
+	(109,1,24,'Thiruvannamalai','A'),
+	(110,1,24,'Pollachi','A'),
+	(111,1,24,'Rajapalayam','A'),
+	(112,1,24,'Gudiyatham','A'),
+	(113,1,24,'Pudukkottai','A'),
+	(114,1,24,'Vaniyambadi','A'),
+	(115,1,24,'Ambur','A'),
+	(116,1,24,'Nagapattinam','A'),
+	(117,1,25,'Hyderabad','A'),
+	(118,1,25,'Warangal','A'),
+	(119,1,26,'Agartala','A'),
+	(120,1,26,'Udaipur','A'),
+	(121,1,27,'Dehradun','A'),
+	(122,1,27,'Rishikesh','A'),
+	(123,1,28,'Lucknow','A'),
+	(124,1,28,'Agra','A'),
+	(125,1,28,'Varanasi','A'),
+	(126,1,28,'Noida','A'),
+	(127,1,28,'Gorakhpur','A'),
+	(128,1,29,'Kolkota','A'),
+	(129,1,29,'Durgapur','A'),
+	(130,1,29,'Howrah','A');
+
+
+create table atm_db.um_role_function(
+funcid integer,
+moduleid integer,
+funcname character varying(50),
+funcdesc character varying(50),
+roletype character varying(20)
+);
+
+INSERT INTO atm_db.um_role_function(funcid,moduleid,funcname,funcdesc,roletype)
+ VALUES	(1,1,'transaction search','transaction searched','M'),
+	(2,1,'transaction view','transaction viewed','V'),
+	(3,1,'transaction history','transactions altered','C'),
+	(4,2,'report generation','generate report','M'),
+	(5,2,'generated reports','reports generated','C'),
+	(6,2,'reports list','reports list view','V'),
+	(7,3,'trasaction search','setting search','M'),
+	(8,3,'trasaction search','approval','C'),
+	(9,3,'trasaction search','list view of all details','V'),
+	(10,4,'Download files','setting downloads','M'),
+	(11,4,'Download permission','approval','C'),
+	(12,4,'View Downloads','list view of dowloads','V'),
+	(13,5,'Login Config','user login configuration','M');
+	
+create table atm_db.um_role_module(
+moduleid integer,
+modulename character varying(30),
+moduledesc character varying(100)
+);
+INSERT INTO atm_db.um_role_module(moduleid,modulename,moduledesc)
+ VALUES	(1,'extraction','Extracting all files'),
+	(2,'report','Generating reports'),
+	(3,'search','Transaction search'),
+	(4,'download','download reports and files'),
+	(5,'login','user role access');
+	
+CREATE SEQUENCE IF NOT EXISTS atm_db.role_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+create table atm_db.um_role_master(
+roleid integer,
+rolename character varying(30),
+roledesc character varying(50),
+roletype text,
+sessiontime integer,
+funcid integer,
+assignfunlist text,
+inst_id character varying(20)
+);
+
+
+INSERT INTO atm_db.um_role_master(roleid,rolename,roledesc,roletype,sessiontime,funcid,assignfunlist,inst_id)
+ VALUES	(nextval('fm_rekon.role_seq'),'Admin','Create Users and Roles','M',15,null,'1,4,7,10,13','1'),
+	(nextval('fm_rekon.role_seq'),'SuperAdmin','Create All Configurations','C',10,null,'3,5,8,11','1'),
+	(nextval('fm_rekon.role_seq'),'User','Manage Users','V',10,null,'2,6,9,12','1');
+	
+	
+create table  atm_db.um_user_rolefuncmap(
+roleid integer,
+funcid integer,
+status char,
+crtdate timestamp without time zone
+);
+
+
+INSERT INTO atm_db.um_user_rolefuncmap(roleid,funcid,status,crtdate)VALUES	
+	(1,1,'A','2023-09-23 01:35:35.463036'),
+	(1,4,'A','2023-09-23 01:35:35.463964'),
+	(1,7,'A','2023-09-23 01:35:35.464558'),
+	(1,10,'A','2023-09-23 01:35:35.465136'),
+	(1,13,'A','2023-09-23 01:35:35.465733'),
+	(2,3,'A','2023-09-23 01:43:50.455752'),
+	(2,5,'A','2023-09-23 01:43:50.456754'),
+	(2,8,'A','2023-09-23 01:43:50.457553'),
+	(2,11,'A','2023-09-23 01:43:50.458273'),
+	(3,2,'A','2023-09-23 01:44:40.762176'),
+	(3,6,'A','2023-09-23 01:44:40.762176'),
+	(3,9,'A','2023-09-23 01:44:40.762176'),
+	(3,12,'A','2023-09-23 01:44:40.762176');
+username: pritish1234
+password: pritish
+note: when you change the password, it should be Pritish@1234 or any name with one uppercase, special character and some numbers
+which satisfies the password criteria. 
